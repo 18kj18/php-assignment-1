@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	
-	</head>
+		<script>
+				function validate(){
+					var elements = {"firstname","lastname","email","password","passwordconfirm","address1","address2","eircode"}
+					var result = True
 
+					 elements.forEach((x) => {
+						if (document.getElementById(x).value == "") {
+							alert("some element not filled")
+							result = False	
+						}
+
+					if(!result){
+						return False					
+					}			
+					
+
+					if(document.querySelector('input[name="genderS"]:checked') === null){
+						alert("Select a gender")
+						return False
+					}
+
+					if(getElementById('password').value != getElementById('passowrdconfirm').value){
+						alert('Passwords do not match')
+						return False
+						}	
+				}
+
+		</script>
+
+	</head>
+		
 	<body>
-	<form>
+	<form action="submit.php" method="post" onsubmit="return validate()">
 		<label for="firstname">First Name</label><br/>
 		<input type="text" id="firstname" maxlength="50"><br/>
 
@@ -16,7 +44,7 @@
 		<input type="text" id="email" maxlength="50"><br/>
 
 		<label for="password">Password</label><br/>
-		<input type="passsword" id="password" maxlength="64"><br/>
+		<input type="password" id="password" maxlength="64"><br/>
 
 		<label for="passwordconfirm">Confirm Password</label></br>
 		<input type="password" id="passwordconfirm" maxlength="64"><br/>
@@ -35,7 +63,16 @@
 
 		</fieldset>
 
+		<label for="adrress1">Address Line 1</label></br>
+		<input type="text" id="address1"><br/>
 
+		<label for="address2">Address Line 2</label></br>
+		<input type="text" id="address2"></br>
+
+		<label for="eircode">Eircode</label></br>
+		<input type="text" id="eircode" maxlength="7"></br>
+
+		<button type="submit">Submit</button>
 
 
 
