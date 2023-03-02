@@ -2,30 +2,31 @@
 <html>
 	<head>
 		<script>
-				function validate(){
-					var elements = {"firstname","lastname","email","password","passwordconfirm","address1","address2","eircode"}
-					var result = True
+				function v(){
+					var elements = ["firstname","lastname","email","password","passwordconfirm","address1","address2","eircode"];
+					var result = true;
 
 					 elements.forEach((x) => {
-						if (document.getElementById(x).value == "") {
-							alert("some element not filled")
-							result = False	
+						if (document.getElementById(x).value == "") {	
+							result = false;
 						}
+					})
 
 					if(!result){
-						return False					
+						alert("Not all fields have been filled");
+						return false;					
 					}			
 					
 
-					if(document.querySelector('input[name="genderS"]:checked') === null){
-						alert("Select a gender")
-						return False
+						if(document.querySelector('input[name="gender"]:checked') === null){
+						alert("Select a gender");
+						return false;
 					}
 
-					if(getElementById('password').value != getElementById('passowrdconfirm').value){
-						alert('Passwords do not match')
-						return False
-						}	
+					if(document.getElementById('password').value != document.getElementById('passwordconfirm').value){
+						alert('Passwords do not match');
+						return false;
+					}	
 				}
 
 		</script>
@@ -33,7 +34,7 @@
 	</head>
 		
 	<body>
-	<form action="submit.php" method="post" onsubmit="return validate()">
+	<form action="submit.php" method="post" onsubmit="return v()">
 		<label for="firstname">First Name</label><br/>
 		<input type="text" id="firstname" maxlength="50"><br/>
 
