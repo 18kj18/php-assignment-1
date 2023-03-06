@@ -30,27 +30,43 @@
 
 	$connection = mysqli_connect($servername,$username,$password, $database, $port);
 
+	$sql = "CREATE TABLE IF NOT EXISTS details (
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			firstname CHAR(64),
+			lastname CHAR(64),
+			email CHAR(300),
+			gender ENUM ('male', 'female','other')DEFAULT 'Other',
+			password CHAR(64),
+			address1 CHAR(64),
+			address2 CHAR(64),
+			eircode CHAR(7))";
+
+	if (mysqli_query($connection, $sql)){
+			echo("Table Created Succesfully");}
+	else {	
+			echo("Table not created, good luck lmao <br/>");}
+
 	if (mysqli_connect_errno()) {
 			echo "Failed to connect to mySQL: " . mysqli_connect_error();
-			exit();
-	}else {
-			$sql = "INSERT INTO DETAILS (firstname. lastname, email, password, address1, address2, eircode) VALUES(firstname, lastname, ";
+			exit();}
+
+	else {	$sql = "INSERT INTO DETAILS (firstname. lastname, email, password, address1, address2, eircode) VALUES(firstname, lastname, ";}
+
+	if (mysqli_query($connection, $sql)){
+			
+			echo("Data added sucesfully");}
+
+	else {
+			echo("Unable to add data at this time" . mysqli_errno($connection));
 	}
-
-	if (mysqli_query($conn, $sql)){
-			echo("Data added sucesfully");
-	} else {
-			echo("Unable to add data at this time" . mysqli_errno($conn)
-
 
 	$sql = "CREATE DATABASE IF NOT EXISTS kj_database";
-	if (mysqli_query($connection, $sql)){
-			echo "Database created succesfully";
-	} else {
-			echo "Error creating database:" . mysqli_error($connection);
-	}
+	if (mysqli_query($connection, $sql)) {
+			echo "Database created succesfully";}
 
-	mysqli_close($conn);
+	else{echo "Error creating database:" . mysqli_error($connection);}
+
+	mysqli_close($connection);
 ?>
 
 </body>
