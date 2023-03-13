@@ -5,6 +5,7 @@
 <body>
 
 <?php
+
 	function inpvalidate($data){
 			$data = trim($data);
 			$data = stripslashes($data);
@@ -18,16 +19,20 @@
 					if(!empty($_POST[$field])) {
 							$field = validate_input($_POST[$field]);
 					}
+
+					//THE ERROR IS HERE /\ /\ /\ /\
 			}
 
-	}else echo('not');
-	echo ($fields);
+	}else echo('this town aint big enough for the both of us');
+
+	print_r($firstname);
+	
 	$servername = "10.140.42.235";
     $username = "KJ";
 	$password = "password";
 	$port = 3307;
 	$database = "kj_database";
-
+	
 	$connection = mysqli_connect($servername,$username,$password, $database, $port);
 
 	//Create Database
@@ -61,7 +66,7 @@
 			echo "Failed to connect to mySQL: " . mysqli_connect_error();
 			exit();}
 
-	else {	$sql = "INSERT INTO details (firstname, lastname, email, password, address1, address2, eircode) VALUES('$_POST[$firstname]', 'lastname','email','password','address1','address2','eircode')";}
+	else {	$sql = "INSERT INTO details (firstname, lastname, email, password, address1, address2, eircode) VALUES('$fields[0]', '$fields[1]','$fields[2]','$fields[3]','$fields[4]','$fields[5]','$fields[6]')";}
 
 	if (mysqli_query($connection, $sql)){
 			
