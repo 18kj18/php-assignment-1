@@ -14,19 +14,18 @@
 
 	if (isset($_POST['submit'])) {
 			$fields = ['firstname','lastname','email','password','address1','address2','eircode'];
+			$values = [];
 
 			foreach($fields as $field){
-					if(!empty($_POST[$field])) {
-							$field = validate_input($_POST[$field]);
-					}
-
-					//THE ERROR IS HERE /\ /\ /\ /\
+					if(!empty($_POST['$field'])) {
+							$values[$field] = validate_input($_POST['$field']);
+							echo($values);
+					}else echo('tjfjfj');
 			}
+
 
 	}else echo('this town aint big enough for the both of us');
 
-	print_r($firstname);
-	
 	$servername = "10.140.42.235";
     $username = "KJ";
 	$password = "password";
@@ -37,14 +36,14 @@
 
 	//Create Database
 	$sql = "CREATE DATABASE IF NOT EXISTS kj_database";
+
 	if (mysqli_query($connection, $sql)) {
 		echo "Database created succesfully <br/>";}
 
 	else{echo "Error creating database:" . mysqli_error($connection);}
-
-																		
+																				
 	//Create Table
-	$sql = "CREATE TABLE IF NOT EXISTS details (
+	$sql = "CREATE TABLE IF NOT EXISTS details (		
 				id INT AUTO_INCREMENT PRIMARY KEY,
 				firstname CHAR(64),
 				lastname CHAR(64),
@@ -66,7 +65,7 @@
 			echo "Failed to connect to mySQL: " . mysqli_connect_error();
 			exit();}
 
-	else {	$sql = "INSERT INTO details (firstname, lastname, email, password, address1, address2, eircode) VALUES('$fields[0]', '$fields[1]','$fields[2]','$fields[3]','$fields[4]','$fields[5]','$fields[6]')";}
+	else {	$sql = "INSERT INTO details (firstname, lastname, email, password, address1, address2, eircode) VALUES('$values[firstname]', '$values[lastname]','$values[password]','$values[email]','$values[address1]','$values[address2]','$values[eircode]')";}
 
 	if (mysqli_query($connection, $sql)){
 			
@@ -77,6 +76,6 @@
 
 	mysqli_close($connection);
 ?>
-
+	 
 </body>
 </html>
