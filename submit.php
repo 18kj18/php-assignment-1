@@ -6,25 +6,13 @@
 
 <?php
 
-	function inpvalidate($data){
+	function inpvalidate($data, $conn){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$data = htmlspecialchars($data);
-			return $data;}
-
-	if (isset($_POST['submit'])) {
-			$fields = ['firstname','lastname','email','password','address1','address2','eircode'];
-			$values = [];
-
-			foreach($fields as $field){
-					if(!empty($_POST['$field'])) {
-							$values[$field] = validate_input($_POST['$field']);
-							echo($values);
-					}else echo('tjfjfj');
-			}
-
-
-	}else echo('this town aint big enough for the both of us');
+			$data = mysqli_real_escape_string($connection, $data);
+			return $data;
+	}
 
 	$servername = "10.140.42.235";
     $username = "KJ";
@@ -33,6 +21,21 @@
 	$database = "kj_database";
 	
 	$connection = mysqli_connect($servername,$username,$password, $database, $port);
+
+	if (isset($_POST['submit'])) {
+			$fields = ['firstname','lastname','email','password','address1','address2','eircode'];
+			$values = [];
+
+			foreach($fields as $field){
+					echo('pensi');
+					if(!empty($_POST['$field'])) {
+							$values[$field] = validate_input($_POST['$field'], $connection);
+							echo($values);
+					}else echo('tjfjfj');
+			}
+
+
+	}else echo('this town aint big enough for the both of us');
 
 	//Create Database
 	$sql = "CREATE DATABASE IF NOT EXISTS kj_database";
