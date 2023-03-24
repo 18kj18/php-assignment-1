@@ -3,10 +3,9 @@
 <head>
 </head>
 <body>
-
 <?php
 
-	function inpvalidate($data, $conn){
+	function validate_input($data, $connection){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$data = htmlspecialchars($data);
@@ -22,26 +21,30 @@
 	
 	$connection = mysqli_connect($servername,$username,$password, $database, $port);
 
-	if (isset($_POST['submit'])) {
-			$fields = ['firstname','lastname','email','password','address1','address2','eircode'];
-			$values = [];
+	if(isset($_POST['submit'])) {
+			if(!empty($_POST['firstname'])) {
+					$firstname = validate_input($_POST['firstname'], $connection);}
+			if(!empty($_POST['lastname'])) {
+					$lastname = validate_input($_POST['lastname'], $connection);}
+			if(!empty($_POST['email'])) {
+					$email = validate_input($_POST['email'], $connection);}
+			if(!empty($_POST['password']));{
+					$password = validate_input($_POST['password'], $connection);}
+			if(!empty($_POST['address1'])) {
+					$address1 = validate_input($_POST['address1'], $connection);}
+			if(!empty($_POST['address2'])) {
+					$address2 = validate_input($_POST['address2'], $connection);}
+			if(!empty($_POST['eircode'])) {
+					$eirode = validate_input($_POST['eircode'], $connection);}
+	}
 
-			foreach($fields as $field){
-					echo('pensi');
-					if(!empty($_POST['$field'])) {
-							$values[$field] = validate_input($_POST['$field'], $connection);
-							echo($values);
-					}else echo('tjfjfj');
-			}
-
-
-	}else echo('this town aint big enough for the both of us');
 
 	//Create Database
 	$sql = "CREATE DATABASE IF NOT EXISTS kj_database";
 
 	if (mysqli_query($connection, $sql)) {
-		echo "Database created succesfully <br/>";}
+echo "Database created succesfully <br/>";}
+
 
 	else{echo "Error creating database:" . mysqli_error($connection);}
 																				
@@ -68,9 +71,9 @@
 			echo "Failed to connect to mySQL: " . mysqli_connect_error();
 			exit();}
 
-	else {	$sql = "INSERT INTO details (firstname, lastname, email, password, address1, address2, eircode) VALUES('$values[firstname]', '$values[lastname]','$values[password]','$values[email]','$values[address1]','$values[address2]','$values[eircode]')";}
+	else {	$sql = "INSERT INTO details (firstname, lastname, email, password, address1, address2, eircode) VALUES('$firstname', '$lastname','$password','$email','$password','$address1','$address2','$eircode')";}
 
-	if (mysqli_query($connection, $sql)){
+if (mysqli_query($connection, $sql)){
 			
 			echo("Data added sucesfully <br/>");}
 
