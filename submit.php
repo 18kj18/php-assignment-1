@@ -35,7 +35,7 @@
 			if(!empty($_POST['address2'])) {
 					$address2 = validate_input($_POST['address2'], $connection);}
 			if(!empty($_POST['eircode'])) {
-					$eirode = validate_input($_POST['eircode'], $connection);}
+					$eircode = validate_input($_POST['eircode'], $connection);}
 	}
 
 
@@ -71,7 +71,8 @@ echo "Database created succesfully <br/>";}
 			echo "Failed to connect to mySQL: " . mysqli_connect_error();
 			exit();}
 
-	else {	$sql = "INSERT INTO details (firstname, lastname, email, password, address1, address2, eircode) VALUES('$firstname', '$lastname','$password','$email','$password','$address1','$address2','$eircode')";}
+	else {	$sql = "INSERT INTO details (firstname, lastname, email, password, address1, address2, eircode) VALUES('$firstname', '$lastname','$email','$password','$address1','$address2','$eircode')";}
+
 
 if (mysqli_query($connection, $sql)){
 			
